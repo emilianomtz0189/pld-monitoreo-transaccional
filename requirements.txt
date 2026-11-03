@@ -1,10 +1,10 @@
-# Dependencias del proyecto. Fíjalas con la salida de la celda
-# "Registro de versiones" del notebook 01 (versiones de Google Colab).
-numpy
-pandas
-pyarrow
-matplotlib
-scikit-learn
-lightgbm
-kagglehub
-psutil
+# Dependencias del proyecto, fijadas a las versiones de Google Colab
+# con las que se ejecutó (Python 3.13.18).
+numpy==2.4.6
+pandas==2.2.3
+pyarrow==23.0.1
+matplotlib==3.10.0
+scikit-learn==1.6.1
+lightgbm==4.6.0
+kagglehub==1.0.3
+psutil==5.9.5

@@ -189,14 +189,12 @@ def resumen_estructura(df: pd.DataFrame) -> pd.DataFrame:
     })
 
 
-def medir_ahorro_memoria(n_filas: int = 500_000) -> dict | None:
+def medir_ahorro_memoria(n_filas: int = 500_000) -> dict:
     """Mide la memoria de las primeras `n_filas` leídas sin tipos vs. con tipos optimizados.
 
     Es una medición real sobre una muestra, no una estimación del total.
     """
-    ruta = obtener_ruta_csv(descargar=False)
-    if ruta is None:
-        return None
+    ruta = obtener_ruta_csv(descargar=True)  # La descarga de Kaggle tarda segundos
     bruto = float(pd.read_csv(ruta, nrows=n_filas).memory_usage(deep=True).sum())
     optimizado = float(pd.read_csv(ruta, nrows=n_filas, dtype=TIPOS).memory_usage(deep=True).sum())
     return {
@@ -213,3 +211,22 @@ def respaldar_resultados(carpeta_drive: Path) -> None:
     destino = Path(carpeta_drive) / DIR_RESULTADOS.name
     shutil.copytree(DIR_RESULTADOS, destino, dirs_exist_ok=True)
     print(f"Resultados respaldados en {destino}")
+
+
+def respaldar_archivo(ruta: Path, carpeta_drive: Path | None) -> None:
+    """Copia un archivo de data/processed/ a Drive (si se usa Colab)."""
+    if carpeta_drive is None:
+        return
+    Path(carpeta_drive).mkdir(parents=True, exist_ok=True)
+    shutil.copy2(ruta, Path(carpeta_drive) / Path(ruta).name)
+    print(f"Respaldo en Drive: {Path(carpeta_drive) / Path(ruta).name}")
+
+
+def recuperar_archivo(ruta: Path, carpeta_drive: Path | None) -> bool:
+    """Si el archivo no está en esta sesión, lo copia desde Drive. Devuelve True si existe."""
+    if not Path(ruta).exists() and carpeta_drive is not None:
+        respaldo = Path(carpeta_drive) / Path(ruta).name
+        if respaldo.exists():
+            Path(ruta).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(respaldo, ruta)
+    return Path(ruta).exists()

@@ -20,6 +20,7 @@ DIR_PROCESADOS = DIR_DATOS / "processed"  # Parquet optimizado (no se sube)
 
 ARCHIVO_CSV = DIR_CRUDOS / "SAML-D.csv"
 ARCHIVO_PARQUET = DIR_PROCESADOS / "transacciones.parquet"
+ARCHIVO_ALERTAS = DIR_PROCESADOS / "alertas.parquet"      # Salida de la etapa 2
 
 DIR_RESULTADOS = RAIZ / "resultados"      # Sí se sube: gráficas y métricas del README
 DIR_FIGURAS = DIR_RESULTADOS / "figuras"

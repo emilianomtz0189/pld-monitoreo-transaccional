@@ -310,3 +310,56 @@ def graficar_mensual(tabla: pd.DataFrame, tasa_global: float):
     ax.grid(axis="x", visible=False)
     fig.tight_layout()
     return fig
+
+
+# --- Gráficas de reglas (etapa 2) -------------------------------------------
+def graficar_alertas_por_dia(resumen: pd.DataFrame):
+    """Barras horizontales: alertas por día que genera cada regla."""
+    t = resumen.iloc[::-1]
+    fig, ax = plt.subplots(figsize=(9, max(2.5, 0.42 * len(t) + 1)))
+    ax.barh(t.index.astype(str), t["alertas_por_dia"], color=COLOR_NORMAL, height=0.6)
+    for y, v in enumerate(t["alertas_por_dia"]):
+        ax.text(v, y, f" {v:,.1f}", va="center", fontsize=8, color=COLOR_REFERENCIA)
+    ax.set_xlabel("Alertas por día (cuenta + semana)")
+    _estilo(ax, "Carga de trabajo: alertas por día de cada regla")
+    ax.grid(axis="y", visible=False)
+    fig.tight_layout()
+    return fig
+
+
+def graficar_precision_recall(resumen: pd.DataFrame):
+    """Cada regla como un punto: recall (cuánto detecta) vs. precisión (cuánto acierta)."""
+    fig, ax = plt.subplots(figsize=(9, 5))
+    ax.scatter(resumen["recall_pct"], resumen["precision_alertas_pct"], s=70, color=COLOR_SOSPECHOSA,
+               edgecolor="white", linewidth=2, zorder=3)
+    # Etiqueta corta (R1, R2a, ...) para que no se encimen; el nombre completo está en la tabla
+    for nombre, fila in resumen.iterrows():
+        corto = "Todas" if nombre.startswith("Todas") else nombre.split()[0]
+        ax.annotate(corto, (fila["recall_pct"], fila["precision_alertas_pct"]), xytext=(6, 4),
+                    textcoords="offset points", fontsize=9, color="#0b0b0b")
+    ax.set_xlabel("Recall: % de las transacciones sospechosas detectadas")
+    ax.set_ylabel("Precisión: % de alertas con algo sospechoso")
+    ax.set_xlim(left=0)
+    ax.set_ylim(bottom=0)
+    _estilo(ax, "Cada regla: cuánto detecta vs. cuánto acierta")
+    fig.tight_layout()
+    return fig
+
+
+def graficar_recall_tipologia(tabla: pd.DataFrame):
+    """Mapa de calor: % de cada tipología que detecta cada regla."""
+    datos = tabla.drop(columns="transacciones")
+    fig, ax = plt.subplots(figsize=(1.1 * datos.shape[1] + 4, 0.42 * datos.shape[0] + 2))
+    imagen = ax.imshow(datos.values, cmap="Oranges", aspect="auto", vmin=0, vmax=100)
+    ax.set_xticks(range(datos.shape[1]), datos.columns, rotation=35, ha="right")
+    ax.set_yticks(range(datos.shape[0]), datos.index)
+    for i in range(datos.shape[0]):
+        for j in range(datos.shape[1]):
+            v = datos.values[i, j]
+            if v >= 1:
+                ax.text(j, i, f"{v:.0f}", ha="center", va="center", fontsize=7,
+                        color="white" if v > 60 else "#0b0b0b")
+    ax.set_title("Recall por tipología: % detectado por cada regla", loc="left", fontsize=11)
+    fig.colorbar(imagen, ax=ax, label="% de las transacciones de la tipología")
+    fig.tight_layout()
+    return fig

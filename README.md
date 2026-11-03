@@ -4,9 +4,24 @@ Sistema de **monitoreo transaccional para Prevención de Lavado de Dinero (PLD)*
 
 Datos: [*SAML-D*](https://www.kaggle.com/datasets/berkanoztas/synthetic-transaction-monitoring-dataset-aml) (Kaggle), dataset sintético de transacciones con etiquetas de lavado y tipologías.
 
-> 🚧 **Proyecto en construcción.** El resumen ejecutivo y los resultados se agregan con las cifras reales de cada etapa conforme se completa.
+> 🚧 **Proyecto en construcción.** El resumen ejecutivo se agrega al terminar todas las etapas.
 
 > **Alcance:** los datos son sintéticos, en libras esterlinas y centrados en Reino Unido. Las reglas toman como referencia conceptos de la regulación mexicana de PLD, pero sus umbrales son **ilustrativos** y no sustituyen los establecidos en las disposiciones vigentes.
+
+---
+
+## Hallazgos de la exploración (etapa 1)
+
+- **Universo:** 9,504,852 transacciones de 855,460 cuentas en 321 días (7-oct-2022 a 23-ago-2023), en promedio 29,610 por día.
+- **Lo sospechoso es escaso:** 9,873 transacciones (0.1039 %, una de cada 962.7). Un sistema que nunca alerta tendría 99.8961 % de exactitud sin detectar nada; por eso se evalúa con precisión y recall.
+- **El riesgo se concentra en pocos canales:** el depósito en efectivo es el 2.37 % de las transacciones pero el 14.23 % de las sospechosas (6.01 veces la tasa promedio); el retiro en efectivo tiene 4.27 veces y la transferencia internacional 2.71 veces.
+- **Riesgo geográfico:** las operaciones internacionales tienen 3.14 veces la tasa promedio y las que cambian de moneda 3.24 veces.
+- **El monto por sí solo no basta:** la mediana sospechosa (£5,322.79) es menor que la normal (£6,114.63), aunque en la cola es al revés (percentil 99: £419,540.08 vs. £44,938.16).
+- **Camuflaje:** el 99.98 % de las cuentas que envían alguna operación sospechosa también realizan operaciones normales.
+- **Fuga de información controlada:** las 28 tipologías (17 sospechosas) son 100 % normales o 100 % sospechosas, así que se excluyen de reglas y modelos.
+- **Eficiencia:** con tipos de dato optimizados, la memoria se redujo 90.7 % en una muestra de 500,000 filas (de 244.5 MB a 22.8 MB).
+
+![Tasa sospechosa por tipo de pago](resultados/figuras/02_tasa_por_tipo_pago.png)
 
 ---
 
@@ -15,7 +30,7 @@ Datos: [*SAML-D*](https://www.kaggle.com/datasets/berkanoztas/synthetic-transact
 | Etapa | Notebook | Qué se hace |
 |---|---|---|
 | 1 | [`01_descarga_y_exploracion`](notebooks/01_descarga_y_exploracion.ipynb) · [Abrir en Colab](https://colab.research.google.com/github/emilianomtz0189/pld-monitoreo-transaccional/blob/main/notebooks/01_descarga_y_exploracion.ipynb) | Carga optimizada en memoria; volumen, desbalance, riesgo por canal, geografía, montos, tipologías y vista por cuenta y mes. |
-| 2 | `02_reglas_monitoreo` *(en desarrollo)* | Reglas de efectivo de monto alto, fraccionamiento, concentración (fan-in / fan-out), movimiento rápido de fondos, operaciones internacionales y cambio de comportamiento; precisión, recall y alertas por día de cada regla. |
+| 2 | [`02_reglas_monitoreo`](notebooks/02_reglas_monitoreo.ipynb) · [Abrir en Colab](https://colab.research.google.com/github/emilianomtz0189/pld-monitoreo-transaccional/blob/main/notebooks/02_reglas_monitoreo.ipynb) | Reglas de efectivo de monto alto, fraccionamiento, concentración (fan-in / fan-out), movimiento rápido de fondos, operaciones internacionales y cambio de comportamiento; precisión, recall y alertas por día de cada regla. |
 | 3 | `03_segmentacion_riesgo` *(pendiente)* | Puntaje de riesgo por cuenta y niveles bajo / medio / alto. |
 | 4 | `04_modelo_priorizacion` *(pendiente)* | Variables por cuenta y ventana de tiempo; validación temporal; regresión logística vs. LightGBM; PR-AUC, recall en el top-K y reducción de alertas. |
 | 5 | `05_resultados` *(pendiente)* | Gráficas y conclusiones de negocio. |
@@ -31,7 +46,8 @@ Datos: [*SAML-D*](https://www.kaggle.com/datasets/berkanoztas/synthetic-transact
 ├── src/
 │   ├── config.py          # Rutas relativas, semilla y parámetros globales
 │   ├── datos.py           # Descarga, carga optimizada, validación y respaldo
-│   └── eda.py             # Análisis exploratorio orientado a PLD
+│   ├── eda.py             # Análisis exploratorio y gráficas
+│   └── reglas.py          # Reglas de monitoreo y su evaluación
 └── requirements.txt       # Librerías del proyecto
 ```
 
