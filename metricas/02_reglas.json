@@ -1,0 +1,406 @@
+{
+  "parametros": {
+    "R1 Efectivo alto": {
+      "umbral_gbp": 6048,
+      "usd_por_gbp": 1.24
+    },
+    "R2a Fraccionamiento justo debajo": {
+      "umbral_gbp": 6048,
+      "dias": 7,
+      "minimo_operaciones": 3,
+      "piso_pct": 0.8
+    },
+    "R2b Fraccionamiento acumulado": {
+      "umbral_gbp": 6048,
+      "dias": 7,
+      "minimo_operaciones": 3,
+      "piso_pct": 0.0
+    },
+    "R3a Concentración fan-in": {
+      "percentil": 99.9,
+      "umbral_contrapartes": 17
+    },
+    "R3b Concentración fan-out": {
+      "percentil": 99.9,
+      "umbral_contrapartes": 23
+    },
+    "R4 Movimiento rápido": {
+      "monto_minimo_gbp": 6048,
+      "tolerancia": 0.1,
+      "dias": 2
+    },
+    "R5 Jurisdicción alto riesgo": {
+      "lista": {
+        "Albania": [
+          null,
+          null
+        ],
+        "Turkey": [
+          null,
+          null
+        ],
+        "UAE": [
+          null,
+          null
+        ],
+        "Nigeria": [
+          "2023-02-24",
+          null
+        ],
+        "Morocco": [
+          null,
+          "2023-02-24"
+        ],
+        "Pakistan": [
+          null,
+          "2022-10-21"
+        ]
+      }
+    },
+    "R6 Cambio de comportamiento": {
+      "factor_monto": 5,
+      "minimo_historial": 10,
+      "monto_minimo_gbp": 1000,
+      "factor_frecuencia": 3,
+      "minimo_frecuencia": 5,
+      "dias": 7,
+      "dias_historial": 30
+    }
+  },
+  "umbral_efectivo_gbp": 6048,
+  "total_sospechosas": 9873,
+  "dias": 321,
+  "reglas": [
+    {
+      "regla": "R1 Efectivo alto",
+      "alertas": 260,
+      "alertas_por_dia": 0.8,
+      "cuentas_alertadas": 259,
+      "alertas_con_sospechosa": 260,
+      "precision_alertas_pct": 100.0,
+      "transacciones_marcadas": 260,
+      "sospechosas_detectadas": 260,
+      "precision_transacciones_pct": 100.0,
+      "recall_pct": 2.63
+    },
+    {
+      "regla": "R2a Fraccionamiento justo debajo",
+      "alertas": 21,
+      "alertas_por_dia": 0.1,
+      "cuentas_alertadas": 12,
+      "alertas_con_sospechosa": 0,
+      "precision_alertas_pct": 0.0,
+      "transacciones_marcadas": 37,
+      "sospechosas_detectadas": 0,
+      "precision_transacciones_pct": 0.0,
+      "recall_pct": 0.0
+    },
+    {
+      "regla": "R2b Fraccionamiento acumulado",
+      "alertas": 15894,
+      "alertas_por_dia": 49.5,
+      "cuentas_alertadas": 5759,
+      "alertas_con_sospechosa": 637,
+      "precision_alertas_pct": 4.01,
+      "transacciones_marcadas": 25262,
+      "sospechosas_detectadas": 914,
+      "precision_transacciones_pct": 3.62,
+      "recall_pct": 9.26
+    },
+    {
+      "regla": "R3a Concentración fan-in",
+      "alertas": 4207,
+      "alertas_por_dia": 13.1,
+      "cuentas_alertadas": 4207,
+      "alertas_con_sospechosa": 12,
+      "precision_alertas_pct": 0.29,
+      "transacciones_marcadas": 921402,
+      "sospechosas_detectadas": 25,
+      "precision_transacciones_pct": 0.0,
+      "recall_pct": 0.25
+    },
+    {
+      "regla": "R3b Concentración fan-out",
+      "alertas": 2118,
+      "alertas_por_dia": 6.6,
+      "cuentas_alertadas": 2118,
+      "alertas_con_sospechosa": 0,
+      "precision_alertas_pct": 0.0,
+      "transacciones_marcadas": 516000,
+      "sospechosas_detectadas": 0,
+      "precision_transacciones_pct": 0.0,
+      "recall_pct": 0.0
+    },
+    {
+      "regla": "R4 Movimiento rápido",
+      "alertas": 20397,
+      "alertas_por_dia": 63.5,
+      "cuentas_alertadas": 12759,
+      "alertas_con_sospechosa": 320,
+      "precision_alertas_pct": 1.57,
+      "transacciones_marcadas": 72550,
+      "sospechosas_detectadas": 524,
+      "precision_transacciones_pct": 0.72,
+      "recall_pct": 5.31
+    },
+    {
+      "regla": "R5 Jurisdicción alto riesgo",
+      "alertas": 73046,
+      "alertas_por_dia": 227.6,
+      "cuentas_alertadas": 19467,
+      "alertas_con_sospechosa": 785,
+      "precision_alertas_pct": 1.07,
+      "transacciones_marcadas": 226135,
+      "sospechosas_detectadas": 982,
+      "precision_transacciones_pct": 0.43,
+      "recall_pct": 9.95
+    },
+    {
+      "regla": "R6 Cambio de comportamiento",
+      "alertas": 133926,
+      "alertas_por_dia": 417.2,
+      "cuentas_alertadas": 21627,
+      "alertas_con_sospechosa": 960,
+      "precision_alertas_pct": 0.72,
+      "transacciones_marcadas": 2455946,
+      "sospechosas_detectadas": 2104,
+      "precision_transacciones_pct": 0.09,
+      "recall_pct": 21.31
+    },
+    {
+      "regla": "Todas las reglas (consolidado)",
+      "alertas": 230508,
+      "alertas_por_dia": 718.1,
+      "cuentas_alertadas": 42212,
+      "alertas_con_sospechosa": 2624,
+      "precision_alertas_pct": 1.14,
+      "transacciones_marcadas": 3623403,
+      "sospechosas_detectadas": 3959,
+      "precision_transacciones_pct": 0.11,
+      "recall_pct": 40.1
+    }
+  ],
+  "recall_por_tipologia": [
+    {
+      "tipologia": "Structuring",
+      "transacciones": 1870,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.43,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 0.48,
+      "R5 Jurisdicción alto riesgo": 11.82,
+      "R6 Cambio de comportamiento": 3.48,
+      "Todas": 15.94
+    },
+    {
+      "tipologia": "Cash_Withdrawal",
+      "transacciones": 1334,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.0,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 0.22,
+      "R5 Jurisdicción alto riesgo": 8.55,
+      "R6 Cambio de comportamiento": 53.97,
+      "Todas": 58.4
+    },
+    {
+      "tipologia": "Deposit-Send",
+      "transacciones": 945,
+      "R1 Efectivo alto": 26.03,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.63,
+      "R3a Concentración fan-in": 0.21,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 28.04,
+      "R5 Jurisdicción alto riesgo": 16.4,
+      "R6 Cambio de comportamiento": 7.62,
+      "Todas": 55.03
+    },
+    {
+      "tipologia": "Smurfing",
+      "transacciones": 932,
+      "R1 Efectivo alto": 1.5,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 97.42,
+      "R3a Concentración fan-in": 0.54,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 0.11,
+      "R5 Jurisdicción alto riesgo": 0.0,
+      "R6 Cambio de comportamiento": 46.24,
+      "Todas": 99.03
+    },
+    {
+      "tipologia": "Layered_Fan_In",
+      "transacciones": 656,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.3,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 2.29,
+      "R5 Jurisdicción alto riesgo": 7.16,
+      "R6 Cambio de comportamiento": 11.13,
+      "Todas": 19.05
+    },
+    {
+      "tipologia": "Layered_Fan_Out",
+      "transacciones": 529,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.19,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 0.19,
+      "R5 Jurisdicción alto riesgo": 5.48,
+      "R6 Cambio de comportamiento": 10.02,
+      "Todas": 15.88
+    },
+    {
+      "tipologia": "Stacked Bipartite",
+      "transacciones": 506,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.59,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 0.2,
+      "R5 Jurisdicción alto riesgo": 3.16,
+      "R6 Cambio de comportamiento": 16.6,
+      "Todas": 20.16
+    },
+    {
+      "tipologia": "Behavioural_Change_1",
+      "transacciones": 394,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.0,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 3.05,
+      "R5 Jurisdicción alto riesgo": 11.93,
+      "R6 Cambio de comportamiento": 1.02,
+      "Todas": 14.47
+    },
+    {
+      "tipologia": "Bipartite",
+      "transacciones": 383,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.52,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 1.57,
+      "R5 Jurisdicción alto riesgo": 2.09,
+      "R6 Cambio de comportamiento": 25.07,
+      "Todas": 28.2
+    },
+    {
+      "tipologia": "Cycle",
+      "transacciones": 382,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.26,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 46.6,
+      "R5 Jurisdicción alto riesgo": 12.04,
+      "R6 Cambio de comportamiento": 17.8,
+      "Todas": 59.95
+    },
+    {
+      "tipologia": "Fan_In",
+      "transacciones": 364,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.0,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 0.0,
+      "R5 Jurisdicción alto riesgo": 2.47,
+      "R6 Cambio de comportamiento": 8.24,
+      "Todas": 10.44
+    },
+    {
+      "tipologia": "Gather-Scatter",
+      "transacciones": 354,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.0,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 0.85,
+      "R5 Jurisdicción alto riesgo": 3.11,
+      "R6 Cambio de comportamiento": 20.9,
+      "Todas": 24.29
+    },
+    {
+      "tipologia": "Behavioural_Change_2",
+      "transacciones": 345,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.0,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 7.25,
+      "R5 Jurisdicción alto riesgo": 54.78,
+      "R6 Cambio de comportamiento": 0.29,
+      "Todas": 58.84
+    },
+    {
+      "tipologia": "Scatter-Gather",
+      "transacciones": 338,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.0,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 0.3,
+      "R5 Jurisdicción alto riesgo": 13.91,
+      "R6 Cambio de comportamiento": 23.08,
+      "Todas": 35.8
+    },
+    {
+      "tipologia": "Single_large",
+      "transacciones": 250,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.4,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 0.0,
+      "R5 Jurisdicción alto riesgo": 9.6,
+      "R6 Cambio de comportamiento": 41.2,
+      "Todas": 48.4
+    },
+    {
+      "tipologia": "Fan_Out",
+      "transacciones": 237,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.0,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 1.69,
+      "R5 Jurisdicción alto riesgo": 8.02,
+      "R6 Cambio de comportamiento": 51.05,
+      "Todas": 56.54
+    },
+    {
+      "tipologia": "Over-Invoicing",
+      "transacciones": 54,
+      "R1 Efectivo alto": 0.0,
+      "R2a Fraccionamiento justo debajo": 0.0,
+      "R2b Fraccionamiento acumulado": 0.0,
+      "R3a Concentración fan-in": 0.0,
+      "R3b Concentración fan-out": 0.0,
+      "R4 Movimiento rápido": 0.0,
+      "R5 Jurisdicción alto riesgo": 0.0,
+      "R6 Cambio de comportamiento": 57.41,
+      "Todas": 57.41
+    }
+  ]
+}
