@@ -1,0 +1,79 @@
+{
+  "niveles": [
+    {
+      "nivel": "alto",
+      "cuentas": 42773,
+      "cuentas_sospechosas": 7069,
+      "pct_cuentas": 5.0,
+      "tasa_sospechosa_pct": 16.5268,
+      "pct_de_las_sospechosas": 89.4584,
+      "veces_el_promedio": 17.8917
+    },
+    {
+      "nivel": "medio",
+      "cuentas": 128319,
+      "cuentas_sospechosas": 697,
+      "pct_cuentas": 15.0,
+      "tasa_sospechosa_pct": 0.5432,
+      "pct_de_las_sospechosas": 8.8206,
+      "veces_el_promedio": 0.588
+    },
+    {
+      "nivel": "bajo",
+      "cuentas": 684368,
+      "cuentas_sospechosas": 136,
+      "pct_cuentas": 80.0,
+      "tasa_sospechosa_pct": 0.0199,
+      "pct_de_las_sospechosas": 1.7211,
+      "veces_el_promedio": 0.0215
+    }
+  ],
+  "pesos": {
+    "pct_efectivo": 0.25,
+    "pct_internacional": 0.15,
+    "pct_alto_riesgo": 0.15,
+    "contrapartes": 0.15,
+    "monto_total": 0.1,
+    "semanas_alertadas": 0.2
+  },
+  "cortes_puntaje": {
+    "medio": 16.812679143384848,
+    "alto": 40.533622846188
+  },
+  "cuentas": 855460,
+  "perfil_mediano_por_nivel": [
+    {
+      "nivel": "bajo",
+      "transacciones": 12.0,
+      "monto_total": 76777.1599,
+      "pct_efectivo": 0.0,
+      "pct_internacional": 0.0,
+      "pct_alto_riesgo": 0.0,
+      "contrapartes": 1.0,
+      "semanas_alertadas": 0.0,
+      "puntaje": 12.3451
+    },
+    {
+      "nivel": "medio",
+      "transacciones": 12.0,
+      "monto_total": 28901.2793,
+      "pct_efectivo": 0.0,
+      "pct_internacional": 1.0,
+      "pct_alto_riesgo": 0.0,
+      "contrapartes": 1.0,
+      "semanas_alertadas": 0.0,
+      "puntaje": 30.4531
+    },
+    {
+      "nivel": "alto",
+      "transacciones": 25.0,
+      "monto_total": 507691.7031,
+      "pct_efectivo": 0.0049,
+      "pct_internacional": 0.2457,
+      "pct_alto_riesgo": 0.0387,
+      "contrapartes": 5.0,
+      "semanas_alertadas": 2.0,
+      "puntaje": 64.0814
+    }
+  ]
+}

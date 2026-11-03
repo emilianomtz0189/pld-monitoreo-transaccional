@@ -1,0 +1,162 @@
+{
+  "particion": [
+    {
+      "index": "entrenamiento",
+      "desde": "2022-10-07",
+      "hasta": "2023-05-04",
+      "casos": "156167",
+      "sospechosos": "1987",
+      "tasa_pct": "1.27"
+    },
+    {
+      "index": "prueba",
+      "desde": "2023-05-05",
+      "hasta": "2023-08-23",
+      "casos": "74341",
+      "sospechosos": "1226",
+      "tasa_pct": "1.65"
+    }
+  ],
+  "resultados_prueba": [
+    {
+      "metodo": "LightGBM",
+      "casos": 74341.0,
+      "casos_sospechosos": 1226.0,
+      "tasa_base_pct": 1.65,
+      "pr_auc": 0.6271,
+      "recall_top_10pct": 83.52,
+      "precision_top_10pct": 13.77,
+      "recall_top_20pct": 93.15,
+      "precision_top_20pct": 7.68,
+      "recall_top_30pct": 97.47,
+      "precision_top_30pct": 5.36,
+      "alertas_para_90pct_recall": 12234.0,
+      "pct_alertas_para_90pct_recall": 16.46,
+      "reduccion_de_alertas_pct": 83.54
+    },
+    {
+      "metodo": "Regresión logística",
+      "casos": 74341.0,
+      "casos_sospechosos": 1226.0,
+      "tasa_base_pct": 1.65,
+      "pr_auc": 0.1546,
+      "recall_top_10pct": 49.84,
+      "precision_top_10pct": 8.22,
+      "recall_top_20pct": 71.62,
+      "precision_top_20pct": 5.91,
+      "recall_top_30pct": 81.57,
+      "precision_top_30pct": 4.48,
+      "alertas_para_90pct_recall": 32591.0,
+      "pct_alertas_para_90pct_recall": 43.84,
+      "reduccion_de_alertas_pct": 56.16
+    },
+    {
+      "metodo": "Número de reglas (sin modelo)",
+      "casos": 74341.0,
+      "casos_sospechosos": 1226.0,
+      "tasa_base_pct": 1.65,
+      "pr_auc": 0.0207,
+      "recall_top_10pct": 17.94,
+      "precision_top_10pct": 2.96,
+      "recall_top_20pct": 26.18,
+      "precision_top_20pct": 2.16,
+      "recall_top_30pct": 35.48,
+      "precision_top_30pct": 1.95,
+      "alertas_para_90pct_recall": 66582.0,
+      "pct_alertas_para_90pct_recall": 89.56,
+      "reduccion_de_alertas_pct": 10.44
+    }
+  ],
+  "dias_prueba": 111,
+  "carga_trabajo": [
+    {
+      "metodo": "LightGBM",
+      "alertas_por_dia_revisando_todo": 669.7,
+      "alertas_por_dia_para_90pct": 110.2,
+      "reduccion_de_alertas_pct": 83.5
+    },
+    {
+      "metodo": "Regresión logística",
+      "alertas_por_dia_revisando_todo": 669.7,
+      "alertas_por_dia_para_90pct": 293.6,
+      "reduccion_de_alertas_pct": 56.2
+    },
+    {
+      "metodo": "Número de reglas (sin modelo)",
+      "alertas_por_dia_revisando_todo": 669.7,
+      "alertas_por_dia_para_90pct": 599.8,
+      "reduccion_de_alertas_pct": 10.4
+    }
+  ],
+  "importancia_lightgbm": {
+    "regla_R1": 7.36,
+    "hist_prom_env_monto": 6.49,
+    "hist_prom_env_tx": 6.27,
+    "rec_pct_efectivo": 4.83,
+    "env_max": 4.66,
+    "env_tx": 4.51,
+    "transacciones_alertadas": 4.35,
+    "env_pct_efectivo": 4.34,
+    "neto_semana": 4.16,
+    "env_ratio_monto": 4.11,
+    "env_semanas_previas": 4.04,
+    "env_ratio_tx": 3.8,
+    "rec_monto": 3.79,
+    "rec_max": 3.65,
+    "rec_contrapartes": 3.54
+  },
+  "coeficientes_logistica": {
+    "env_tx": -2.886,
+    "rec_contrapartes": 1.428,
+    "rec_tx": -1.377,
+    "env_ratio_tx": 1.275,
+    "env_contrapartes": 1.151,
+    "rec_monto": 1.101,
+    "regla_R1": 1.042,
+    "env_monto": 0.978,
+    "env_max": -0.847,
+    "regla_R3b": -0.735,
+    "env_pct_internacional": 0.466,
+    "rec_semanas_previas": -0.382,
+    "regla_R2b": 0.357,
+    "casos_previos": -0.34,
+    "env_pct_efectivo": 0.325
+  },
+  "semana_corte": 30,
+  "fecha_corte": "2023-05-05",
+  "variables": [
+    "regla_R1",
+    "regla_R2a",
+    "regla_R2b",
+    "regla_R3a",
+    "regla_R3b",
+    "regla_R4",
+    "regla_R5",
+    "regla_R6",
+    "num_reglas",
+    "transacciones_alertadas",
+    "env_tx",
+    "env_monto",
+    "env_max",
+    "env_pct_efectivo",
+    "env_pct_internacional",
+    "env_contrapartes",
+    "hist_prom_env_tx",
+    "hist_prom_env_monto",
+    "env_semanas_previas",
+    "rec_tx",
+    "rec_monto",
+    "rec_max",
+    "rec_pct_efectivo",
+    "rec_pct_internacional",
+    "rec_contrapartes",
+    "hist_prom_rec_tx",
+    "hist_prom_rec_monto",
+    "rec_semanas_previas",
+    "env_ratio_monto",
+    "env_ratio_tx",
+    "rec_ratio_monto",
+    "neto_semana",
+    "casos_previos"
+  ]
+}
