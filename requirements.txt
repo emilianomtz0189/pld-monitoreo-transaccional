@@ -1,0 +1,10 @@
+# Dependencias del proyecto. Fíjalas con la salida de la celda
+# "Registro de versiones" del notebook 01 (versiones de Google Colab).
+numpy
+pandas
+pyarrow
+matplotlib
+scikit-learn
+lightgbm
+kagglehub
+psutil
