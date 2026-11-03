@@ -363,3 +363,76 @@ def graficar_recall_tipologia(tabla: pd.DataFrame):
     fig.colorbar(imagen, ax=ax, label="% de las transacciones de la tipología")
     fig.tight_layout()
     return fig
+
+
+# --- Gráficas de segmentación y modelo (etapas 3 y 4) ------------------------
+def graficar_niveles(tabla: pd.DataFrame):
+    """Por nivel de riesgo: % de las cuentas vs. % de las cuentas sospechosas que concentra."""
+    t = tabla.loc[["bajo", "medio", "alto"]]
+    x = np.arange(len(t))
+    ancho = 0.36
+    fig, ax = plt.subplots(figsize=(8, 3.8))
+    b1 = ax.bar(x - ancho / 2 - 0.01, t["pct_cuentas"], ancho, color=COLOR_NORMAL, label="% de las cuentas")
+    b2 = ax.bar(x + ancho / 2 + 0.01, t["pct_de_las_sospechosas"], ancho, color=COLOR_SOSPECHOSA,
+                label="% de las cuentas sospechosas")
+    for barras in (b1, b2):
+        for b in barras:
+            ax.text(b.get_x() + b.get_width() / 2, b.get_height(), f"{b.get_height():.1f}%", ha="center",
+                    va="bottom", fontsize=8, color=COLOR_REFERENCIA)
+    ax.set_xticks(x, [f"Riesgo {n}" for n in t.index])
+    ax.set_ylabel("%")
+    ax.legend(frameon=False, fontsize=8)
+    _estilo(ax, "Segmentación: cuántas cuentas hay en cada nivel y cuánto riesgo concentra")
+    ax.grid(axis="x", visible=False)
+    fig.tight_layout()
+    return fig
+
+
+COLORES_MODELOS = {"LightGBM": "#2a78d6", "Regresión logística": "#eb6834", "Número de reglas (sin modelo)": "#8a8984"}
+
+
+def graficar_ganancia(curvas: dict, recall_objetivo: float = 90):
+    """% de alertas revisadas vs. % de casos sospechosos capturados, por método de ordenamiento."""
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.plot([0, 100], [0, 100], color="#c3c2b7", linestyle=":", linewidth=1.5, label="Orden al azar")
+    for nombre, (x, y) in curvas.items():
+        ax.plot(x, y, linewidth=2, color=COLORES_MODELOS.get(nombre, COLOR_REFERENCIA), label=nombre)
+    ax.axhline(recall_objetivo, color=COLOR_REFERENCIA, linestyle="--", linewidth=1)
+    ax.annotate(f"{recall_objetivo:.0f}% de los casos sospechosos", xy=(100, recall_objetivo), xytext=(-4, -12),
+                textcoords="offset points", ha="right", fontsize=8, color=COLOR_REFERENCIA)
+    ax.set_xlabel("% de alertas revisadas (de mayor a menor puntaje)")
+    ax.set_ylabel("% de casos sospechosos capturados")
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 101)
+    ax.legend(frameon=False, fontsize=8, loc="lower right")
+    _estilo(ax, "Priorización: cuántas alertas hay que revisar para encontrar los casos")
+    fig.tight_layout()
+    return fig
+
+
+def graficar_pr(curvas: dict, tasa_base: float):
+    """Curvas precisión-recall de cada método."""
+    fig, ax = plt.subplots(figsize=(8, 5))
+    for nombre, (recall, precision) in curvas.items():
+        ax.plot(recall, precision, linewidth=2, color=COLORES_MODELOS.get(nombre, COLOR_REFERENCIA), label=nombre)
+    ax.axhline(tasa_base, color="#c3c2b7", linestyle=":", linewidth=1.5, label=f"Al azar ({tasa_base:.2f}%)")
+    ax.set_xlabel("Recall (%)")
+    ax.set_ylabel("Precisión (%)")
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 101)
+    ax.legend(frameon=False, fontsize=8)
+    _estilo(ax, "Curva precisión-recall en la muestra de prueba")
+    fig.tight_layout()
+    return fig
+
+
+def graficar_importancia(importancia: pd.Series, titulo: str):
+    """Barras horizontales con las variables más importantes."""
+    t = importancia.iloc[::-1]
+    fig, ax = plt.subplots(figsize=(8, max(3, 0.32 * len(t) + 1)))
+    ax.barh(t.index.astype(str), t.values, color=COLOR_NORMAL, height=0.6)
+    ax.set_xlabel("Importancia relativa (%)")
+    _estilo(ax, titulo)
+    ax.grid(axis="y", visible=False)
+    fig.tight_layout()
+    return fig

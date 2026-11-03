@@ -31,8 +31,8 @@ Datos: [*SAML-D*](https://www.kaggle.com/datasets/berkanoztas/synthetic-transact
 |---|---|---|
 | 1 | [`01_descarga_y_exploracion`](notebooks/01_descarga_y_exploracion.ipynb) · [Abrir en Colab](https://colab.research.google.com/github/emilianomtz0189/pld-monitoreo-transaccional/blob/main/notebooks/01_descarga_y_exploracion.ipynb) | Carga optimizada en memoria; volumen, desbalance, riesgo por canal, geografía, montos, tipologías y vista por cuenta y mes. |
 | 2 | [`02_reglas_monitoreo`](notebooks/02_reglas_monitoreo.ipynb) · [Abrir en Colab](https://colab.research.google.com/github/emilianomtz0189/pld-monitoreo-transaccional/blob/main/notebooks/02_reglas_monitoreo.ipynb) | Reglas de efectivo de monto alto, fraccionamiento, concentración (fan-in / fan-out), movimiento rápido de fondos, operaciones internacionales y cambio de comportamiento; precisión, recall y alertas por día de cada regla. |
-| 3 | `03_segmentacion_riesgo` *(pendiente)* | Puntaje de riesgo por cuenta y niveles bajo / medio / alto. |
-| 4 | `04_modelo_priorizacion` *(pendiente)* | Variables por cuenta y ventana de tiempo; validación temporal; regresión logística vs. LightGBM; PR-AUC, recall en el top-K y reducción de alertas. |
+| 3 | [`03_segmentacion_riesgo`](notebooks/03_segmentacion_riesgo.ipynb) · [Abrir en Colab](https://colab.research.google.com/github/emilianomtz0189/pld-monitoreo-transaccional/blob/main/notebooks/03_segmentacion_riesgo.ipynb) | Puntaje de riesgo por cuenta y niveles bajo / medio / alto. |
+| 4 | [`04_modelo_priorizacion`](notebooks/04_modelo_priorizacion.ipynb) · [Abrir en Colab](https://colab.research.google.com/github/emilianomtz0189/pld-monitoreo-transaccional/blob/main/notebooks/04_modelo_priorizacion.ipynb) | Variables por cuenta y ventana de tiempo; validación temporal; regresión logística vs. LightGBM; PR-AUC, recall en el top-K y reducción de alertas. |
 | 5 | `05_resultados` *(pendiente)* | Gráficas y conclusiones de negocio. |
 
 ## Estructura del repositorio
@@ -47,7 +47,9 @@ Datos: [*SAML-D*](https://www.kaggle.com/datasets/berkanoztas/synthetic-transact
 │   ├── config.py          # Rutas relativas, semilla y parámetros globales
 │   ├── datos.py           # Descarga, carga optimizada, validación y respaldo
 │   ├── eda.py             # Análisis exploratorio y gráficas
-│   └── reglas.py          # Reglas de monitoreo y su evaluación
+│   ├── reglas.py          # Reglas de monitoreo y su evaluación
+│   ├── segmentacion.py    # Puntaje y niveles de riesgo por cuenta
+│   └── modelo.py          # Casos, variables y métricas de priorización
 └── requirements.txt       # Librerías del proyecto
 ```
 
